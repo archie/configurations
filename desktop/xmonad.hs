@@ -31,14 +31,15 @@ myManageHook = composeAll
         className =? "Gimp" --> doFloat
         , className =? "VNC" --> doFloat
         , className =? "VLC" --> doFloat
-        , className =? "Firefox" --> doShift "1:web"
-        , className =? "Thunderbird" --> doShift "3:mail"
-        , className =? "MonoDevelop" --> doShift "4:dev"
-        , className =? "Emacs" --> doShift "4:dev"
+        , className =? "Firefox" --> doShift "1"
+	, className =? "Chrome" --> doShift "1"
+        , className =? "Thunderbird" --> doShift "3"
+        , className =? "MonoDevelop" --> doShift "4"
+        , className =? "Emacs" --> doShift "4"
         , className =? "MPlayer" --> doFloat
-        , className =? "Skype" --> doShift "5:chat"
-        , className =? "Empathy" --> doShift "5:chat"
-        , className =? "Spotify" --> doShift "9:spotify"
+        , className =? "Skype" --> doShift "5"
+        , className =? "Pidgin" --> doShift "5"
+        , className =? "Spotify" --> doShift "9"
         --, isFullscreen --> doFullFloat
         , manageDocks
    ]
@@ -48,13 +49,11 @@ main = do
     xmproc <- spawnPipe "xmobar /home/archie/.xmonad/xmobar.rc"
     xmonad $ defaultConfig
         {
-         -- Left WIN Key as modifying
-          -- rather than Left ALT
           modMask = mod1Mask
 --      , focusFollowsMouse = True
 --      , workspaces         = myWorkspaces
 --      , normalBorderColor  = "#444"
---      , focusedBorderColor = "#f00"
+--      , FOCUSEDBorderColor = "#f00"
         , workspaces = ["1","2","3","4","5","6","7","8","9","0"]
         , manageHook = myManageHook <+> manageHook defaultConfig	 
 
@@ -68,5 +67,5 @@ main = do
 
         -- This hack is necessary to make Java GUIs like NetBeans work.  See the FAQ.
         --, logHook = setWMName "LG3D"
-        }
+        } `removeKeysP` ["M-w"]
 
